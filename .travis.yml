@@ -1,0 +1,12 @@
+sudo: required
+language: generic
+services: 
+  - docker
+
+before_install:
+# We give a tag to call the image id when needed
+  - docker build -t dockergkz/docker-react -f Dockerfile.dev .
+
+script:
+# We add -e CI=true to make it exit once tests are done
+  - docker run -e CI=true dockergkz/docker-react npm run test
